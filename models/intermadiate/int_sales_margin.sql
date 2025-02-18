@@ -9,6 +9,7 @@ product as (
 )
 
 select 
+    sales.date_date,
     sales.orders_id,
     sales.pdt_id,
     sales.quantity,
