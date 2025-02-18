@@ -6,7 +6,7 @@ sales_margin as (
 
 select 
     sales_margin.orders_id,
-    sales_margin.date_date,
+    max(sales_margin.date_date) as date_date,
     sum(sales_margin.revenue) as revenue,
     sum(sales_margin.quantity) as quantity,
     sum(sales_margin.purchase_cost) as purchase_cost,
