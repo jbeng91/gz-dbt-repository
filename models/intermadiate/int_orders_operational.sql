@@ -21,4 +21,4 @@ select
 
 from orders_margin
 left join shipping
-on orders_margin.orders_id = shipping.order_id
+on orders_margin.orders_id = shipping.orders_id
