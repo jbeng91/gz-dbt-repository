@@ -1,22 +1,17 @@
-{{ config(
-    materialized='table'
-) }}
 
-with
+with 
 
 orders as (
-    select * from `psychic-destiny-449109-v6`.`dbt_ozeng`.`int_orders_margin`
+    select * from {{ ref('int_orders_margin') }}
 ),
 
-
 shipping as (
-    select * from `psychic-destiny-449109-v6`.`dbt_ozeng`.`stg_ship`
-)
+    select * from {{ ref('stg_ship') }}
+),
 
 operational as (
-    select * from `psychic-destiny-449109-v6`.`dbt_ozeng`.`int_orders_operational`
+    select * from {{ ref('int_orders_operational') }}
 )
-
 
 select 
     cast(orders.date_date as DATE) as date_date,
@@ -31,6 +26,6 @@ select
     sum(orders.quantity) as total_quantity_sold
 from orders
 left join operational on orders.orders_id = operational.orders_id
-left join shipping on orders.orders_id = shipping.order_id
+left join shipping on orders.orders_id = shipping.orders_id
 group by date_date
-order by date_date;
+order by date_date
