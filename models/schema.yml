@@ -7,7 +7,7 @@ sources:
     tables:
 
         - name: sales
-          identifier: psychic-destiny-449109-v6.gz_raw_data.raw_gz_sales #quel est le nom exacte de la table dans Big Query
+          identifier: raw_gz_sales #quel est le nom exacte de la table dans Big Query
           description: sales of greenweez / we have one per product_id found in each order_id
           columns:
             - name: "(orders_id || '-' || pdt_id)"
@@ -17,20 +17,20 @@ sources:
                 - not_null
 
         - name: product
-          identifier: psychic-destiny-449109-v6.gz_raw_data.raw_gz_product #quel est le nom exacte de la table dans Big Query
+          identifier: raw_gz_product #quel est le nom exacte de la table dans Big Query
           description: purchase_price by product_id
           columns:
-            - name: product_id
+            - name: products_id
               description: primary key of the table
               tests:
                 - unique
                 - not_null
 
         - name: ship
-          identifier: psychic-destiny-449109-v6.gz_raw_data.raw_gz_ship #quel est le nom exacte de la table dans Big Query
+          identifier: raw_gz_ship #quel est le nom exacte de la table dans Big Query
           description: shipcost and logcost by order_id
           columns:
-              - name: order_id
+              - name: orders_id
                 description: primary key of the table
                 tests:
                   - unique
