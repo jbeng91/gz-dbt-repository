@@ -34,4 +34,148 @@ sources:
                 description: primary key of the table
                 tests:
                   - unique
-                  - not_null
+                  - not_nul
+
+models:
+  # 🔹 Intermediate Model: int_sales_margin
+  - name: int_sales_margin
+    description: Computes margin per product by joining sales and product data.
+    columns:
+      - name: orders_id
+        description: Unique identifier for each order.
+        tests:
+          - not_null
+      - name: pdt_id
+        description: Unique identifier for each product within an order.
+        tests:
+          - not_null
+      - name: quantity
+        description: Number of units of the product in the order.
+        tests:
+          - not_null
+      - name: revenue
+        description: Total revenue generated from this product in the order.
+        tests:
+          - not_null
+      - name: purchase_price
+        description: The unit purchase price of the product.
+        tests:
+          - not_null
+      - name: date_date
+        description: The date when the order was placed.
+        tests:
+          - not_null
+      - name: purchase_cost
+        description: Total cost of purchasing the product (quantity * purchase_price).
+        tests:
+          - not_null
+      - name: margin
+        description: Profit margin calculated as (revenue - purchase_cost).
+        tests:
+          - not_null
+
+  # 🔹 Intermediate Model: int_orders_margin
+  - name: int_orders_margin
+    description: Aggregates margin data at the order level, including total revenue, margin, and purchase cost per order.
+    columns:
+      - name: orders_id
+        description: Unique identifier for each order.
+        tests:
+          - unique
+          - not_null
+      - name: date_date
+        description: Date of the order.
+        tests:
+          - not_null
+      - name: revenue
+        description: Total revenue for the order.
+        tests:
+          - not_null
+      - name: quantity
+        description: Total quantity of products in the order.
+        tests:
+          - not_null
+      - name: purchase_cost
+        description: Total purchase cost for the order.
+        tests:
+          - not_null
+      - name: margin
+        description: Revenue minus purchase cost, representing the order's margin.
+        tests:
+          - not_null
+
+  # 🔹 Intermediate Model: int_orders_operational
+  - name: int_orders_operational
+    description: Calculates operational margin per order, incorporating shipping fees and logistics costs.
+    columns:
+      - name: orders_id
+        description: Unique identifier for each order.
+        tests:
+          - unique
+          - not_null
+      - name: date_date
+        description: Date of the order.
+        tests:
+          - not_null
+      - name: operational_margin
+        description: Margin adjusted for shipping fees, logistics costs, and shipping costs.
+        tests:
+          - not_null
+      - name: shipping_fee
+        description: Shipping fee paid by the customer.
+        tests:
+          - not_null
+      - name: logcost
+        description: Logistics cost incurred for the order.
+        tests:
+          - not_null
+      - name: ship_cost
+        description: Cost incurred by the company for shipping.
+        tests:
+          - not_null
+
+  # 🔹 Mart Model: finance_days
+  - name: finance_days
+    description: Aggregates daily financial metrics for the finance team, including revenue, transactions, and costs.
+    columns:
+      - name: date_date
+        description: Date of the financial records.
+        tests:
+          - unique
+          - not_null
+      - name: nb_transactions
+        description: Total number of transactions per day.
+        tests:
+          - not_null
+      - name: revenue
+        description: Total revenue generated per day.
+        tests:
+          - not_null
+      - name: average_basket
+        description: Average order value (revenue per transaction).
+        tests:
+          - not_null
+      - name: margin
+        description: Total margin (revenue - purchase cost) per day.
+        tests:
+          - not_null
+      - name: operational_margin
+        description: Adjusted margin that accounts for logistics and shipping costs.
+        tests:
+          - not_null
+      - name: total_purchase_cost
+        description: Total cost of goods purchased per day.
+        tests:
+          - not_null
+      - name: total_shipping_fees
+        description: Total amount collected as shipping fees.
+        tests:
+          - not_null
+      - name: total_log_costs
+        description: Total logistics costs incurred per day.
+        tests:
+          - not_null
+      - name: total_quantity_sold
+        description: Total number of products sold per day.
+        tests:
+          - not_null

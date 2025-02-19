@@ -11,7 +11,7 @@ stg_ship as (
     select
         orders_id,
         shipping_fee,
-        logcost,
+        logCost,
         cast(ship_cost as FLOAT64) as ship_cost
 
     from source
