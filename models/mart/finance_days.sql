@@ -1,5 +1,8 @@
+{{ config(
+    materialized='table'
+) }}
 
-with 
+with
 
 orders as (
     select * from {{ ref('int_orders_margin') }}
