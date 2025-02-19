@@ -127,3 +127,214 @@ models:
         description: Number of times the ad was displayed.
       - name: click
         description: Number of clicks received.
+
+  - name: int_campaigns
+    description: Combines all ad campaign data into a single intermediate model from multiple sources.
+    columns:
+      - name: "(campaign_key  || '-' || date_date)"
+        description: Unique key for each ad campaign.
+        tests:
+          - not_null
+          - unique  # Primary key
+
+      - name: date_date
+        description: The date when the ad campaign ran.
+        tests:
+          - not_null
+
+      - name: paid_source
+        description: The source of the paid ad (e.g., Google Ads, Bing Ads, Criteo, Facebook).
+        tests:
+          - not_null
+
+      - name: campaign_name
+        description: The name of the ad campaign.
+        tests:
+          - not_null
+
+      - name: ads_cost
+        description: The total cost of the ad campaign in the given period.
+        tests:
+          - not_null
+
+      - name: impression
+        description: The number of times the ad was displayed to users.
+        tests:
+          - not_null
+
+      - name: click
+        description: The number of clicks the ad received.
+        tests:
+          - not_null
+
+  - name: int_campaigns_day
+    description: Aggregated ad campaign data per day.
+    columns:
+      - name: date_date
+        description: The date of the aggregated ad campaign data.
+        tests:
+          - not_null
+
+      - name: ads_cost
+        description: The total ad cost per day.
+        tests:
+          - not_null
+
+      - name: ads_impression
+        description: The total number of ad impressions per day.
+        tests:
+          - not_null
+
+      - name: ads_clicks
+        description: The total number of ad clicks per day.
+        tests:
+          - not_null
+
+  - name: finance_campaigns_day
+    description: Aggregated finance and ad campaign data per day.
+    columns:
+      - name: date_date
+        description: The date of the financial and campaign data.
+        tests:
+          - not_null
+          - unique  # Ensures one record per day
+
+      - name: ads_margin
+        description: Profit margin after deducting ad costs from operational margin (`operational_margin - ads_cost`).
+        tests:
+          - not_null
+
+      - name: average_basket
+        description: The average value of an order per day.
+        tests:
+          - not_null
+
+      - name: operational_margin
+        description: Profit margin after deducting logistics and shipping costs.
+        tests:
+          - not_null
+
+      - name: ads_cost
+        description: Total advertising cost per day.
+        tests:
+          - not_null
+
+      - name: ads_impression
+        description: Total number of ad impressions per day.
+        tests:
+          - not_null
+
+      - name: ads_clicks
+        description: Total number of ad clicks per day.
+        tests:
+          - not_null
+
+      - name: quantity
+        description: Total number of products sold per day.
+        tests:
+          - not_null
+
+      - name: revenue
+        description: Total revenue generated per day.
+        tests:
+          - not_null
+
+      - name: purchase_cost
+        description: Total cost of goods purchased per day.
+        tests:
+          - not_null
+
+      - name: margin
+        description: Revenue minus purchase cost.
+        tests:
+          - not_null
+
+      - name: shipping_fee
+        description: Total amount collected as shipping fees.
+        tests:
+          - not_null
+
+      - name: logcost
+        description: Total logistics costs incurred per day.
+        tests:
+          - not_null
+
+      - name: ship_cost
+        description: Total combined shipping and logistics costs (`shipping_fee + logcost`).
+        tests:
+          - not_null
+          
+  - name: finance_campaigns_month
+    description: Aggregated finance and ad campaign data per month.
+    columns:
+      - name: datemonth
+        description: The first day of the month for aggregated financial data.
+        tests:
+          - not_null
+          - unique  # Ensures one record per month
+
+      - name: ads_margin
+        description: Profit margin after deducting ad costs from operational margin.
+        tests:
+          - not_null
+
+      - name: average_basket
+        description: The average order value per month.
+        tests:
+          - not_null
+
+      - name: operational_margin
+        description: Total profit margin after logistics and shipping costs per month.
+        tests:
+          - not_null
+
+      - name: ads_cost
+        description: Total advertising cost per month.
+        tests:
+          - not_null
+
+      - name: ads_impression
+        description: Total number of ad impressions per month.
+        tests:
+          - not_null
+
+      - name: ads_clicks
+        description: Total number of ad clicks per month.
+        tests:
+          - not_null
+
+      - name: quantity
+        description: Total number of products sold per month.
+        tests:
+          - not_null
+
+      - name: revenue
+        description: Total revenue generated per month.
+        tests:
+          - not_null
+
+      - name: purchase_cost
+        description: Total cost of goods purchased per month.
+        tests:
+          - not_null
+
+      - name: margin
+        description: Total revenue minus purchase cost per month.
+        tests:
+          - not_null
+
+      - name: shipping_fee
+        description: Total amount collected as shipping fees per month.
+        tests:
+          - not_null
+
+      - name: logcost
+        description: Total logistics costs incurred per month.
+        tests:
+          - not_null
+
+      - name: ship_cost
+        description: Total combined shipping and logistics costs per month.
+        tests:
+          - not_null
+
