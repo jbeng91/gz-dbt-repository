@@ -38,125 +38,92 @@ sources:
               - unique
               - not_null
 
+      # Updated source names for ad campaigns
+      - name: adwords google
+        identifier: raw_gz_adwords
+        description: Google Ads campaign data
+
+      - name: bing microsoft
+        identifier: raw_gz_bing
+        description: Microsoft Bing Ads campaign data
+
+      - name: criteo ads
+        identifier: raw_gz_criteo
+        description: Criteo Ads campaign data
+
+      - name: facebook ads
+        identifier: raw_gz_facebook
+        description: Facebook Ads campaign data
+
 models:
-  - name: my_new_project
-    description: Models for my project
+  - name: stg_adwords_google
+    description: Staging model for Google Ads data.
+    columns:
+      - name: date_date
+        description: The date of the ad campaign.
+      - name: paid_source
+        description: The source of the paid ad (e.g., Google Ads).
+      - name: campaign_key
+        description: Unique key for the campaign.
+      - name: campaign_name
+        description: The name of the ad campaign.
+      - name: ads_cost
+        description: The cost of the ad campaign.
+      - name: impression
+        description: Number of times the ad was displayed.
+      - name: click
+        description: Number of clicks received.
 
-    subdirectories:
-      - name: intermediate
-        description: Intermediate transformations
-        models:
-          - name: int_sales_margin
-            description: Computes margin per product by joining sales and product data.
-            columns:
-              - name: orders_id
-                description: Unique identifier for each order.
-                tests:
-                  - not_null
-              - name: pdt_id
-                description: Unique identifier for each product within an order.
-                tests:
-                  - not_null
-              - name: quantity
-                description: Number of units of the product in the order.
-                tests:
-                  - not_null
-              - name: revenue
-                description: Total revenue generated from this product in the order.
-                tests:
-                  - not_null
-              - name: purchase_price
-                description: The unit purchase price of the product.
-                tests:
-                  - not_null
-              - name: date_date
-                description: The date when the order was placed.
-                tests:
-                  - not_null
-              - name: purchase_cost
-                description: Total cost of purchasing the product (quantity * purchase_price).
-                tests:
-                  - not_null
-              - name: margin
-                description: Profit margin calculated as (revenue - purchase_cost).
-                tests:
-                  - not_null
+  - name: stg_bing_microsoft
+    description: Staging model for Microsoft Bing Ads data.
+    columns:
+      - name: date_date
+        description: The date of the ad campaign.
+      - name: paid_source
+        description: The source of the paid ad (e.g., Bing Ads).
+      - name: campaign_key
+        description: Unique key for the campaign.
+      - name: campaign_name
+        description: The name of the ad campaign.
+      - name: ads_cost
+        description: The cost of the ad campaign.
+      - name: impression
+        description: Number of times the ad was displayed.
+      - name: click
+        description: Number of clicks received.
 
-          - name: int_orders_margin
-            description: Aggregates margin data at the order level, including total revenue, margin, and purchase cost per order.
-            columns:
-              - name: orders_id
-                description: Unique identifier for each order.
-                tests:
-                  - unique
-                  - not_null
-              - name: date_date
-                description: Date of the order.
-                tests:
-                  - not_null
-              - name: revenue
-                description: Total revenue for the order.
-                tests:
-                  - not_null
-              - name: quantity
-                description: Total quantity of products in the order.
-                tests:
-                  - not_null
-              - name: purchase_cost
-                description: Total purchase cost for the order.
-                tests:
-                  - not_null
-              - name: margin
-                description: Revenue minus purchase cost, representing the order's margin.
-                tests:
-                  - not_null
+  - name: stg_criteo_ads
+    description: Staging model for Criteo Ads data.
+    columns:
+      - name: date_date
+        description: The date of the ad campaign.
+      - name: paid_source
+        description: The source of the paid ad (e.g., Criteo Ads).
+      - name: campaign_key
+        description: Unique key for the campaign.
+      - name: campaign_name
+        description: The name of the ad campaign.
+      - name: ads_cost
+        description: The cost of the ad campaign.
+      - name: impression
+        description: Number of times the ad was displayed.
+      - name: click
+        description: Number of clicks received.
 
-      - name: mart
-        description: Aggregated models for financial analysis
-        models:
-          - name: finance_days
-            description: Aggregates daily financial metrics for the finance team, including revenue, transactions, and costs.
-            columns:
-              - name: date_date
-                description: Date of the financial records.
-                tests:
-                  - unique
-                  - not_null
-              - name: nb_transactions
-                description: Total number of transactions per day.
-                tests:
-                  - not_null
-              - name: revenue
-                description: Total revenue generated per day.
-                tests:
-                  - not_null
-              - name: average_basket
-                description: Average order value (revenue per transaction).
-                tests:
-                  - not_null
-              - name: margin
-                description: Total margin (revenue - purchase cost) per day.
-                tests:
-                  - not_null
-              - name: operational_margin
-                description: Adjusted margin that accounts for logistics and shipping costs.
-                tests:
-                  - not_null
-              - name: total_purchase_cost
-                description: Total cost of goods purchased per day.
-                tests:
-                  - not_null
-              - name: total_shipping_fees
-                description: Total amount collected as shipping fees.
-                tests:
-                  - not_null
-              - name: total_log_costs
-                description: Total logistics costs incurred per day.
-                tests:
-                  - not_null
-              - name: total_quantity_sold
-                description: Total number of products sold per day.
-                tests:
-                  - not_null
-
-
+  - name: stg_facebook_ads
+    description: Staging model for Facebook Ads data.
+    columns:
+      - name: date_date
+        description: The date of the ad campaign.
+      - name: paid_source
+        description: The source of the paid ad (e.g., Facebook Ads).
+      - name: campaign_key
+        description: Unique key for the campaign.
+      - name: campaign_name
+        description: The name of the ad campaign.
+      - name: ads_cost
+        description: The cost of the ad campaign.
+      - name: impression
+        description: Number of times the ad was displayed.
+      - name: click
+        description: Number of clicks received.
