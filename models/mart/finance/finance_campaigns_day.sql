@@ -22,3 +22,4 @@ WITH combined_data AS (
 SELECT * 
 FROM combined_data
 ORDER BY date_date DESC
+
